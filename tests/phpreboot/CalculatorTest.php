@@ -96,6 +96,7 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
             array('4,5,6', 15),
             array('2,3,4,5', 14),
             array('4,7,3,4,7,3,5,6,7,4,3,2,5,7,5,3,4,6,7,8,9,5,5,5,4,3,2', 133),
+            array('2\n3,4,5', 14),
         );
     }
 }
