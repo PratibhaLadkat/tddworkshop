@@ -71,4 +71,31 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->calculator->add('1,a', 'Invalid parameter do not throw exception');
     }
+    
+    /**
+     * Testcase for multiple parameter
+     * 
+     * @dataProvider dataProviderForMultipleParameter
+     */
+    public function testAddWithMultiParametersReturnsTheirSum($params, $expectedResult)
+    {
+        $result = $this->calculator->add($params);
+
+        $this->assertSame($expectedResult, $result, 'Add with two parameter do not returns correct sum');
+    }
+   
+    /**
+     * Data provider for multipple parameter
+     * 
+     * @return type
+     */
+    public function dataProviderForMultipleParameter()
+    {
+        return array(
+            array('2,3', 5),
+            array('4,5,6', 15),
+            array('2,3,4,5', 14),
+            array('4,7,3,4,7,3,5,6,7,4,3,2,5,7,5,3,4,6,7,8,9,5,5,5,4,3,2', 133),
+        );
+    }
 }
