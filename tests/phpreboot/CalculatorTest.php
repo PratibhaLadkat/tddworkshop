@@ -101,17 +101,21 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @dataProvider dataProviderForMultipleParameterAndMultiDelimiter
+     * @dataProvider dataProviderForMultipleParameterWithMultiDelimiter
      */
     public function testAddWithMultiParametersWithDiffernetDelimiter($params, $expectedResult)
     {
        $result = $this->calculator->add($params);
 
-        $this->assertSame($expectedResult, $result, 'Add with two parameter do not returns correct sum');  
+        $this->assertSame($expectedResult, $result, 'Add with multiple parameters with mutiple delimiters do not returns correct sum');  
     }
     
-    
-    public function dataProviderForMultipleParameterAndMultiDelimiter()
+    /**
+     * Data provider for multipple parameter with multiple delimiters
+     * 
+     * @return type
+     */
+    public function dataProviderForMultipleParameterWithMultiDelimiter()
     {
         return array(
             array('\\;\\3;4;5', 12),
@@ -120,5 +124,16 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
             array('4;7;3;4;7;3;5,6,7,4,3,2,5,7,5,3,4,6,7,8,9,5,5,5,4,3,2', 133),
             array('2\n3,4,5', 14),
         );
+    }
+    
+    /**
+     * Testcase to test negative param
+     * 
+     * @expectedException InvalidArgumentException
+     * 
+     */
+    public function testAddWithNegativeParameter()
+    {
+        $result = $this->calculator->add('\\,\\2,7,-3,5,-2');
     }
 }

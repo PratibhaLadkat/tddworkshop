@@ -19,9 +19,12 @@ class Calculator
         if (array_filter($numbersArray, 'is_numeric') !== $numbersArray) {
             throw new \InvalidArgumentException('Parameters string must contain numbers');
         }
+        
         if (array_filter($numbersArray, function ($v) {return $v > 0;}) !== $numbersArray) {
-            throw new \InvalidArgumentException('Negative numbers not allowed');
+            $negativeNumbers = array_filter($numbersArray, function ($v) {return $v < 0;});
+            throw new \InvalidArgumentException('Negative numbers ('. implode(',',$negativeNumbers).')not allowed');
         }
+        $numbersArray = array_filter($numbersArray, function ($v) {return $v < 1000;});
         return array_sum($numbersArray);
     }
 }
