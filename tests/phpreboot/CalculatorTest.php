@@ -87,7 +87,7 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Data provider for multipple parameter
      * 
-     * @return type
+     * @return array
      */
     public function dataProviderForMultipleParameter()
     {
@@ -113,7 +113,7 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Data provider for multipple parameter with multiple delimiters
      * 
-     * @return type
+     * @return array
      */
     public function dataProviderForMultipleParameterWithMultiDelimiter()
     {
@@ -135,5 +135,28 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase
     public function testAddWithNegativeParameter()
     {
         $result = $this->calculator->add('\\,\\2,7,-3,5,-2');
+    }
+    
+    /**
+     * @dataProvider dataProviderForProduct
+     */
+    public function testProductWithMultiParametersWithDiffernetDelimiter($params, $expectedResult)
+    {
+        $result = $this->calculator->product($params);
+
+        $this->assertSame($expectedResult, $result, 'product not correct');  
+    }
+    
+    /**
+     * Data provider for multiplication
+     * @return array
+     */
+    public function dataProviderForProduct()
+    {
+        return array(
+            array('10,20', 200),
+            array('4;5;6', 120),
+            array('2;3;1000', 6),
+        );
     }
 }
